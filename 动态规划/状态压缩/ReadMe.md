@@ -54,3 +54,6 @@ while (temp != 0) {
 
 (i & (i - 1)) == 0
 
+// lowbit
+
+lowbit(i) = i & (-i)
