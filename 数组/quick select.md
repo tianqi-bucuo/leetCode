@@ -5,7 +5,7 @@
 ```Java
 class Solution {
     public int kthLargestElement(int k, int[] nums) {
-        if (nums == null || nums.length == 0 || k < 1 || k > nums.length){
+        if (nums == null || nums.length == 0){
             return -1;
         }
         return partition(nums, 0, nums.length - 1, nums.length - k);
@@ -16,28 +16,28 @@ class Solution {
             return nums[k];
         }
         
-        int left = start, right = end;
+        int i = start, j = end;
         int pivot = nums[(start + end) / 2];
         
-        while (left <= right) {
-            while (left <= right && nums[left] < pivot) {
-                left++;
+        while (i <= j) {
+            while (i <= j && nums[i] < pivot) {
+                i++;
             }
-            while (left <= right && nums[right] > pivot) {
-                right--;
+            while (i <= j && nums[j] > pivot) {
+                j--;
             }
-            if (left <= right) {
-                swap(nums, left, right);
-                left++;
-                right--;
+            if (i <= j) {
+                swap(nums, i, j);
+                i++;
+                j--;
             }
         }
         
-        if (k <= right) {
-            return partition(nums, start, right, k);
+        if (k <= j) {
+            return partition(nums, start, j, k);
         }
-        if (k >= left) {
-            return partition(nums, left, end, k);
+        if (k >= i) {
+            return partition(nums, i, end, k);
         }
         return nums[k];
     }    
@@ -47,5 +47,5 @@ class Solution {
         nums[i] = nums[j];
         nums[j] = tmp;
     }
-};
+}
 ```
